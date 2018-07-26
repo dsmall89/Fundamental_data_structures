@@ -22,7 +22,7 @@ class Node(object):
         return "Node value :" + str(self.data)
 
 
-class LinkedList(object):
+class linkedList(object):
 
     def __init__(self, head = None):
         self.head = head
@@ -31,7 +31,7 @@ class LinkedList(object):
         new_node = Node(data)
         new_node.set_pointer_to_next_node(self.head)
         self.head = new_node
- # Returns size of list
+
     def return_size_of_list(self):
         current_item_in_list = self.head
         count = 0
@@ -59,6 +59,7 @@ class LinkedList(object):
         previous = None
         found = False
         while current_item_in_list and found is False:
+
             if current_item_in_list.get_data() == data:
                 found = True
             else:
@@ -73,27 +74,30 @@ class LinkedList(object):
         else:
             previous.set_pointer_to_next_node(current_item_in_list.get_next())
 
-    def remove_duplicates(self,data):
-        current_item_in_list = self.head
-        second = None
-        while current_item_in_list is not None:
+    def remove_duplicates(self):
 
-            while second.get_next() is not None:
-                if second.get_next().get_data() == current_item_in_list.get_data():
+            current_item_in_list = self.head
+            while current_item_in_list is not None:
+                runner = current_item_in_list
+                while runner is not None:
+                    prev = runner
+                    runner = runner.get_next()
+                    if runner is None:
+                        break
+                    if runner.get_data() == current_item_in_list.get_data():
+                        next = runner.get_next()
+                        prev.set_pointer_to_next_node(next)
 
-
-                else:
-                    the_second_node = second.get_next()
-                current_item_in_list = second= current_item_in_list.get_next()
+                current_item_in_list = current_item_in_list.get_next()
 
 
 
 #Prints out the values in a LinkedList
     def print_list(self):
-        print("Print List.........")
+        print("Print List.................")
         if self.head is None:
             return
-        this_node= self.head
+        this_node = self.head
         print(this_node.to_string())
 
         while this_node.has_next():
@@ -101,6 +105,8 @@ class LinkedList(object):
             print(this_node.to_string())
 #Original list
 # a-> a->b-> c -> d -> e -> e
+#Expected list
+# a-> b-> c -> d -> e
 
 def main():
     l = LinkedList()
@@ -108,12 +114,12 @@ def main():
     l.insert_a_new_node_into_the_list("a")
     l.insert_a_new_node_into_the_list("b")
     l.insert_a_new_node_into_the_list("c")
+    l.insert_a_new_node_into_the_list("c")
+    l.insert_a_new_node_into_the_list("c")
     l.insert_a_new_node_into_the_list("d")
     l.insert_a_new_node_into_the_list("e")
     l.insert_a_new_node_into_the_list("e")
     l.print_list()
 
-    l.remove_duplicates('a')
+    l.remove_duplicates()
     l.print_list()
-
-main()
