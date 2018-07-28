@@ -44,6 +44,7 @@ class linkedList(object):
     def search(self, data):
         current_item_in_list = self.head
         found = False
+        import pdb; pdb.set_trace()
         while current_item_in_list and found is False:
             if current_item_in_list.get_data() == data:
                 found = True
@@ -109,7 +110,7 @@ class linkedList(object):
 # a-> b-> c -> d -> e
 
 def main():
-    l = LinkedList()
+    l = linkedList()
     l.insert_a_new_node_into_the_list("a")
     l.insert_a_new_node_into_the_list("a")
     l.insert_a_new_node_into_the_list("b")
@@ -119,7 +120,10 @@ def main():
     l.insert_a_new_node_into_the_list("d")
     l.insert_a_new_node_into_the_list("e")
     l.insert_a_new_node_into_the_list("e")
+    l.search('d')
     l.print_list()
 
     l.remove_duplicates()
     l.print_list()
+
+main()
