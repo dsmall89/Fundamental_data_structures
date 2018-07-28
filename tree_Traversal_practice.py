@@ -8,15 +8,15 @@ class Node:
 
     def insert(self, current_Node, val):
 
-        if current_Node is None:
+        if node is None:
             return Node(val)
 
 
         if (val <= current_Node.val):
             if (self.left== None):
-                current_Node.left - insert(current_Noden.left, val)
+                current_Node.left = insert(current_Noden.left, val)
             else:
-                current_Node.right - insert(current_Noden.right, val)
+                current_Node.right = insert(current_Noden.right, val)
             return current_Node
 
 
@@ -44,11 +44,11 @@ class Node:
                    root = None
                    return temp
 
-
+             temp = minValueNode(root.right)
 
              root.val = temp.val
 
-             root.right = deleteNode(root.right, temp)
+             root.right = delete(root.right, temp)
 
         return root
 
