@@ -56,9 +56,10 @@ class NodeInsertionTest(unittest.TestCase):
         self.assertEquals(root.left, None)
 
     def test_delete_empty_node(self):
+        root = delete(9)
 
         with self.assertRaises(ValueError):
-            Node(" ").delete(9)
+            root.delete(9)
 
     # def test_delete_value_not_in_a_tree_with_two(self):
     #     root = Node(6)
