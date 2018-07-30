@@ -15,7 +15,7 @@ class NodeInsertionTest(unittest.TestCase):
 
     def test_default_node_has_given_value_and_no_children(self):
         n = Node(5)
-        self.assertEquals(5, n.val)
+        self.assertEquals(5, n.input_value)
         self.assertEquals(None, n.left)
         self.assertEquals(None, n.right)
 
@@ -25,7 +25,7 @@ class NodeInsertionTest(unittest.TestCase):
         self.assertEquals(Node(4), root.left)
         self.assertEquals(None, root.right)
 
-    def test_insert_less_than_root_when_child_on_that_side_already(self):
+    def test_insert_less_than_root_when_child_on_that_side_already_exist(self):
         root = Node(5)
         root.insert(4)
         root.insert(3)
@@ -39,13 +39,38 @@ class NodeInsertionTest(unittest.TestCase):
         self.assertEquals(Node(6),root.right)
         self.assertEquals(None,root.left)
 
-    def test_insert_greater_than_root_when_child_on_that_side_already(self):
+    def test_insert_greater_than_root_when_child_on_that_side_already_exist(self):
         root = Node(5)
         root.insert(6)
         root.insert(7)
         self.assertEquals(Node(6), root.right)
         self.assertEquals(Node(7), root.right.right)
         self.assertEquals(None, root.left)
+
+    def test_delete_removes_value_from_tree(self):
+        root = Node(6)
+        root.insert(5)
+
+        root.delete(5)
+        self.assertEquals(Node(6),root)
+        self.assertEquals(root.left, None)
+
+    def test_delete_empty_node(self):
+
+        with self.assertRaises(ValueError):
+            Node(" ").delete(9)
+
+    # def test_delete_value_not_in_a_tree_with_two(self):
+    #     root = Node(6)
+    #     root.insert(5)
+    #     root.insert(4)
+    #
+    #     with self.assertRaises(ValueError):
+    #         root.delete(9)
+    #
+
+
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,98 +1,110 @@
 class Node(object):
 
 
-    def __init__(self,val):
+    def __init__(self,input_value):
         self.left = None
         self.right = None
-        self.val = val
+        self.input_value = input_value
 
     def __eq__(self, other):
-        return other is not None and self.val == other.val
+        return other is not None and self.input_value == other.input_value
 
     def __repr__(self):
-        return "Node(val=%s)" % self.val
+        return "Node(value = %s)" % self.input_value
 
-    def insert(self, val):
-        if self.val == val:
+    def insert(self, input_value):
+        if self.input_value == input_value:
             return None
 
 
-        if val < self.val:
+        if input_value < self.input_value:
             if self.left:
-                return self.left.insert(val)
+                return self.left.insert(input_value)
             else:
-                self.left = Node(val)
+                self.left = Node(input_value)
         else:
             if self.right:
-                return self.right.insert(val)
+                return self.right.insert(input_value)
             else:
-                self.right = Node(val)
+                self.right = Node(input_value)
 
 
     def in_order(self, fn):
-        if self:
-            if self.left:
+            if self.left :
                 self.left.in_order(fn)
             fn(self)
             if self.right:
                 self.right.in_order(fn)
 
+    def post_order(self, fn):
+        if self:
+            if self.left:
+                self.left.post_order(fn)
+
+            if self.right:
+                self.right.post_order(fn)
+        fn(self)
+
+    def pre_order(self, fn):
 
 
-    def min_value_node(self,node):
+        fn(self)
+        if self:
+            if self.left:
+                self.left.pre_order(fn)
+
+            if self.right:
+                self.right.pre_order(fn)
+
+
+    def min_input_value_node(self,node):
         current= node
         while(current.left is not None):
             current = current.left
             return current
 
-    def delete(self, root, val):
+    def delete(self, input_value):
         #root is the top Node
-        # "val" refers to the input element/node that needs to be deleted !!!
+        # "input_value" refers to the input element/node that needs to be deleted !!!
         # Here is the base case, if there is No root, return Nothing !!!
-        if root is None:
-            return root
-        # if the val is less than the root's val, we know it is located in the left subtree !!!
-        if val < root.val:
-            root.left = self.delete(root.left, val)
+        if self is None:
+            return None
+        # if the input_value is less than the root's input_value, we know it is located in the left subtree !!!
+        #mport pdb; pdb.set_trace()
+        
+        if input_value < self.input_value:
+            self.left = self.left.delete(input_value)
 
-        # if the val is less than the root's val, we know it is located in the "right" subtree !!!
-        elif val > root.val:
-            root.right= self.delete(root.right, val)
+        # if the input_value is less than the root's input_value, we know it is located in the "right" subtree !!!
+        elif input_value > self.input_value :
+            self.right = self.right.delete(input_value)
 
         else:
-             if root.right is None:
-                 temp = root.left is None
-                 root = None
+             if self.left is None:
+                 temp = self.right
+                 self = None
                  return temp
-             elif root.right is None:
-                   temp = root.left
-                   root = None
+             elif self.right is None:
+                   temp = self.left
+                   self = None
                    return temp
 
-             temp = min_Value_node(root.right)
+             temp = min_input_value_node(self.right)
+             self.input_value = temp.input_value
+             self.right = self.right.delete(temp.input_value)
 
-             root.val = temp.val
-
-             root.right = delete(root.right, temp)
-
-        return root
+        return self
 
 
 
 
 
-# def printPostorder(root):
-#     if root:
-#         #First recur on left child
-#          printPostorder(root.left)
-#          #Then recur on right child
-#          printPostorder(root.right)
-#          print(root.val),
+
 
 # def printPreorder(root ):
 #     if root:
 #         # First print the data of Node
-#          print(root.val),
+#          print(root.input_value),
 #         #Then recur on left child
 #          printPreorder(root.left)
 #         #Finally recur on right child
@@ -103,15 +115,31 @@ class Node(object):
 
 
 if __name__ == '__main__':
-    tree = Node(10)
-    tree.insert(20)
-    tree.insert(30)
-    tree.insert(32)
+    tree = Node(1)
+    tree.insert(2)
+    tree.insert(3)
+    tree.insert(4)
+    tree.insert(5)
 
     def print_it(n):
-        print(n)
+        print(n),
 
+    print("\nPre_order ")
+    tree.pre_order(print_it)
+    print("")
+    print("\nIn_order ")
     tree.in_order(print_it)
+    print("")
+    print("\nPost_order")
+    tree.post_order(print_it)
+
+    print("\n")
+    #import pdb; pdb.set_trace()
+    tree.delete(5)
+    tree.post_order(print_it)
+
+
+
 
 
 
