@@ -7,7 +7,7 @@ class Node(object):
         self.input_value = input_value
 
     def __eq__(self, other):
-        return other is not None and self.input_value == other.input_value
+        return type(self) == type(other) and self.input_value.__eq__other.input_value
 
     def __repr__(self):
         return "Node(value = %s)" % self.input_value
@@ -71,7 +71,7 @@ class Node(object):
             return None
         # if the input_value is less than the root's input_value, we know it is located in the left subtree !!!
         #mport pdb; pdb.set_trace()
-        
+
         if input_value < self.input_value:
             self.left = self.left.delete(input_value)
 
@@ -94,6 +94,22 @@ class Node(object):
              self.right = self.right.delete(temp.input_value)
 
         return self
+
+    def search(self, input_value):
+        if(input_value == self.input_value):
+            return input_value
+
+        elif(input_value < self.input_value):
+            if self.left:
+                return "Node(value = %s)" % self.left.search(input_value)
+            else:
+                return False
+        else:
+            if self.right:
+                return "Node right searched (value = %s)" % self.right.search(input_value)
+            else:
+                return False
+
 
 
 
@@ -137,6 +153,8 @@ if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     tree.delete(5)
     tree.post_order(print_it)
+    print("\n")
+    print(tree.search(2))
 
 
 

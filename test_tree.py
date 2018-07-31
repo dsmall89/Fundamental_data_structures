@@ -47,7 +47,7 @@ class NodeInsertionTest(unittest.TestCase):
         self.assertEquals(Node(7), root.right.right)
         self.assertEquals(None, root.left)
 
-    def test_delete_removes_value_from_tree(self):
+    def test_seach_finds_value_from_tree(self):
         root = Node(6)
         root.insert(5)
 
@@ -56,19 +56,28 @@ class NodeInsertionTest(unittest.TestCase):
         self.assertEquals(root.left, None)
 
     def test_delete_empty_node(self):
-        root = delete(9)
+        root = Node(8)
+        root.insert(7)
+        root.insert(6)
 
-        with self.assertRaises(ValueError):
-            root.delete(9)
+        root.delete(7)
+        root.delete(6)
+        self.assertEquals(Node(8),root)
+        self.assertEquals(root.left ,None)
+        self.assertEquals(root.right ,None)
 
-    # def test_delete_value_not_in_a_tree_with_two(self):
-    #     root = Node(6)
-    #     root.insert(5)
-    #     root.insert(4)
-    #
-    #     with self.assertRaises(ValueError):
-    #         root.delete(9)
-    #
+
+    def test_found_value__is_in_a_tree_(self):
+        root = Node(8)
+        root.insert(7)
+        root.insert(6)
+
+        found_item = root.search(7)
+
+        self.assertEquals(found_item,Node(7))
+
+
+
 
 
 
