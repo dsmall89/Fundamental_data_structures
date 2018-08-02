@@ -7,7 +7,10 @@ class Node(object):
         self.input_value = input_value
 
     def __eq__(self, other):
-        return type(self) == type(other) and self.input_value.__eq__other.input_value
+        # Node() is an instance of an node, not the class node which represented as Node
+        # issue was I was checking for compatiablities of types, which often general practice with an eq method
+
+        return isinstance(other, Node) and self.input_value == other.input_value
 
     def __repr__(self):
         return "Node(value = %s)" % self.input_value
@@ -28,6 +31,15 @@ class Node(object):
             else:
                 self.right = Node(input_value)
 
+
+    def in_order_iteration(self):
+        if self.left:
+            for left_child in self.left.in_order_iteration():
+                yield left_child
+        yield self
+        if self.right:
+            for right_child in self.right.in_order_iteration():
+                yield right_child
 
     def in_order(self, fn):
             if self.left :
@@ -97,18 +109,14 @@ class Node(object):
 
     def search(self, input_value):
         if(input_value == self.input_value):
-            return input_value
+            return self
 
         elif(input_value < self.input_value):
             if self.left:
-                return "Node(value = %s)" % self.left.search(input_value)
-            else:
-                return False
+                return self.left.search(input_value)
         else:
             if self.right:
-                return "Node right searched (value = %s)" % self.right.search(input_value)
-            else:
-                return False
+                return  self.right.search(input_value)
 
 
 
