@@ -44,7 +44,7 @@ class linkedList(object):
     def search(self, data):
         current_item_in_list = self.head
         found = False
-        
+
         while current_item_in_list and found is False:
             if current_item_in_list.get_data() == data:
                 found = True
@@ -125,5 +125,3 @@ def main():
 
     l.remove_duplicates()
     l.print_list()
-
-main()

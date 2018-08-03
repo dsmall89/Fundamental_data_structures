@@ -1,27 +1,54 @@
-class hashmap(object):
-    def __init__(self, size=8):
-        self.buckets = self.init_storage(size)
-        self.count = 0 
 
-    def set(self,key, value):
-        bucket = self.bucket(key)
+from LinkedList import linkedList,Node
 
-        if bucket.has_key(key):
-            bucket.update(key,value)
+class hashcontainer_of_hashed_elements(object):
+    def __init__(self):
+        self.size = 8
+        self.container_of_hashed_elements= [None] * self.size
+
+    def __set__(self,key, value):
+
+        indx_of_key_value = self.__get__(key)
+        value = [key,value]
+
+        if self.container_of_hashed_elements[indx_of_key_value] is None:
+            self.container_of_hashed_elements[indx_of_key_value] = list([value])
         else:
-            bucket.append(key,value)
-            self.count +=1
+            for pair in self.container_of_hashed_elements[indx_of_key_value]:
+                if pair[0] == key:
+                    pair[1] = value
+                    return True
 
-        if self.count > self.num_buckets():
-            self.resize()
+    def __repr__(self):
+        return str(self.container_of_hashed_elements)
+    def has_key(self,key):
+        pass
 
-        return size
 
-    def init_storage(self,num_buckets):
-        storage = []
-        if num_buckets  < 8:
-           num_buckets = 8
-        while len(storage) < num_buckets:
-            storage.append(linkedList())
+    def __get__(self,key):
+        hash = 0
+        for char in str(key):
+            hash += ord(char)
+        return hash % self.size
 
-            return storage
+
+    def delete(self,key):
+        value = self.__get__(key)
+        if self.container_of_hashed_elements[value] != None:
+            if isinstance(self.container_of_hashed_elements[value], list):
+                #import pdb; pdb.set_trace()
+                indx = self.container_of_hashed_elements[value].index(key)
+                self.container_of_hashed_elements[value][indx] = None
+            else:
+                keyError()
+
+def main():
+    h = hashcontainer_of_hashed_elements()
+    h.__set__(10,"Nope")
+    h.__set__(13,"Almost")
+    h.__set__(12,"Gone")
+    print(h)
+    #h.delete(13)
+    print("Was removed")
+    print(h)
+main()
