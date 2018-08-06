@@ -1,53 +1,55 @@
 
 from LinkedList import linkedList,Node
 
-class hashcontainer_of_hashed_elements(object):
+class HashMap_practice(object):
     def __init__(self):
-        self.size = 4
-        self.container_of_hashed_elements= [None] * self.size
+        self.size = 8
+        self.bucket_of_hashed_elements= [None] * self.size
+    def get_hash(self,key):
+        hash = 0
+        for indx_hash_ref_num_in_bucket in str(key):
+            hash += ord(indx_hash_ref_num_in_bucket)
+            calculatated_hash_ref_num_in_buckets = hash % self.size
 
-    def __set__(self,key, value):
+        return calculatated_hash_ref_num_in_buckets
+
+    def add_to_hash_bucket(self,key, hash_ref_num_in_bucket):
         # gets the key
-        indx_of_key_value = self.__get__(key)
+        indx_of_key_hash_ref_num_in_bucket = self.get_hash(key)
 
-        #creates key + value pairs
-        value = [key,value]
+        #creates key + hash_ref_num_in_bucket pairs
+        hash_ref_num_in_bucket = [key,hash_ref_num_in_bucket]
 
-        if self.container_of_hashed_elements[indx_of_key_value] is None:
+        if self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] is None:
 
-            #sets the empty container to list of "key" "value"
-            self.container_of_hashed_elements[indx_of_key_value] = list([value])
-            assigned_value = self.container_of_hashed_elements[indx_of_key_value]
-            return assigned_value
+            #sets the empty container to list of "key" "hash_ref_num_in_bucket"
+            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = list([hash_ref_num_in_bucket])
+            assigned_hash_ref_num_in_bucket = self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket]
+            return assigned_hash_ref_num_in_bucket
 
         else:
             # if not empty, check if element at indx[0] equals key
-            print self.container_of_hashed_elements[indx_of_key_value],
-            for pair in self.container_of_hashed_elements[indx_of_key_value]:
+            print self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket],
+            for pair in self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket]:
 
                 if pair[0] == key:
                     print(pair[0])
-                    # if so, then the element at indx[1] corresponds to its value
-                    pair[1] = value
+                    # if so, then the element at indx[1] corresponds to its hash_ref_num_in_bucket
+                    pair[1] = hash_ref_num_in_bucket
+                    self.map[indx_of_key_hash_ref_num_in_bucket].append(key_hash_ref_num_in_bucket)
                     return True
 
     def __repr__(self):
-        return str(self.container_of_hashed_elements)
+        return str(self.bucket_of_hashed_elements)
     def has_key(self,key):
         pass
 
-    def __get__(self,key):
-        hash = 0
-        for indx_value in str(key):
-            hash += ord(indx_value)
-            calculatated_values = hash % self.size
 
-        return calculatated_values
     def get_item(self,key):
-        key_value = self.__get__(key)
-        if self.container_of_hashed_elements[key_value] is not None:
+        key_hash_ref_num_in_bucket = self.get_hash(key)
+        if self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket] is not None:
 
-            for pair in self.container_of_hashed_elements[key_value]:
+            for pair in self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket]:
 
                 if pair[0] == key:
                     return pair[1]
@@ -58,21 +60,25 @@ class hashcontainer_of_hashed_elements(object):
 
 
     def delete(self,key):
-        value = self.__get__(key)
-        if self.container_of_hashed_elements[value] != None:
-            if isinstance(self.container_of_hashed_elements[value], list):
-                #import pdb; pdb.set_trace()
-                indx = self.container_of_hashed_elements[value].index(key)
-                self.container_of_hashed_elements[value][indx] = None
-            else:
-                keyError()
+        hash_ref_num_in_bucket = self.get_hash(key)
+        if self.bucket_of_hashed_elements[hash_ref_num_in_bucket] is None:
+            return None
+
+
+        for index in range (0,len(self.bucket_of_hashed_elements[hash_ref_num_in_bucket])):
+            if self.bucket_of_hashed_elements[hash_ref_num_in_bucket][index][0] == key:
+                self.bucket_of_hashed_elements[hash_ref_num_in_bucket].pop(1)
+                return True
+
+        return None
 
 def main():
-    h = hashcontainer_of_hashed_elements()
-    h.__set__(10,"Nope")
-    h.__set__(13,"Almost")
-    h.__set__(12,"Gone")
+    h = HashMap_practice()
+    h.add_to_hash_bucket(10,"Nope")
+    h.add_to_hash_bucket(13,"Almost")
+    h.add_to_hash_bucket(12,"Gone")
     h.get_item(12)
     print(h)
-    #h.delete(13)
+    h.delete("13")
     print(h.get_item(10))
+main()

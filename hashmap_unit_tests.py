@@ -19,11 +19,12 @@ class hashmap_test(unittest.TestCase):
 
     def test_set_two_elments(self):
             pass
+    #dup shows up or dont show up
 
-    def test_get_one_element_in_hash_map(self):
-        get_hash = hashcontainer_of_hashed_elements()
-        result= get_hash.__set__(2,"val1")
-        result2=result.get_item(2)
+    # def test_get_one_element_in_hash_map(self):
+    #     get_hash = hashcontainer_of_hashed_elements()
+    #     result= get_hash.__set__(2,"val1")
+    #     result2=result.get_item(2)
 
         self.assertTrue(result2 == 2)
 
