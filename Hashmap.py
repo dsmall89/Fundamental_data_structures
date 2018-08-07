@@ -13,7 +13,7 @@ class HashMap_practice(object):
 
         return calculatated_hash_ref_num_in_buckets
 
-    def add_to_hash_bucket(self,key, hash_ref_num_in_bucket):
+    def __setitem__(self,key, hash_ref_num_in_bucket):
         # gets the key
         indx_of_key_hash_ref_num_in_bucket = self.get_hash(key)
 
@@ -23,9 +23,8 @@ class HashMap_practice(object):
         if self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] is None:
 
             #sets the empty container to list of "key" "hash_ref_num_in_bucket"
-            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = list([hash_ref_num_in_bucket])
-            assigned_hash_ref_num_in_bucket = self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket]
-            return assigned_hash_ref_num_in_bucket
+            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = filter(None,[hash_ref_num_in_bucket])
+
 
         else:
             # if not empty, check if element at indx[0] equals key
@@ -45,7 +44,7 @@ class HashMap_practice(object):
         pass
 
 
-    def get_item(self,key):
+    def __getitem__(self,key):
         key_hash_ref_num_in_bucket = self.get_hash(key)
         if self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket] is not None:
 
@@ -56,9 +55,6 @@ class HashMap_practice(object):
         return None
 
 
-
-
-
     def delete(self,key):
         hash_ref_num_in_bucket = self.get_hash(key)
         if self.bucket_of_hashed_elements[hash_ref_num_in_bucket] is None:
@@ -67,18 +63,27 @@ class HashMap_practice(object):
 
         for index in range (0,len(self.bucket_of_hashed_elements[hash_ref_num_in_bucket])):
             if self.bucket_of_hashed_elements[hash_ref_num_in_bucket][index][0] == key:
-                self.bucket_of_hashed_elements[hash_ref_num_in_bucket].pop(1)
+                self.bucket_of_hashed_elements[hash_ref_num_in_bucket].pop(index)
                 return True
 
         return None
 
+    def remove_empty_list(self,empty_list):
+        empty_list = [t for t in  enum(empty_list) if t ]
+        return empty_list
+
+
+
 def main():
     h = HashMap_practice()
-    h.add_to_hash_bucket(10,"Nope")
-    h.add_to_hash_bucket(13,"Almost")
-    h.add_to_hash_bucket(12,"Gone")
-    h.get_item(12)
+    h.__setitem__(10,"Nope")
+    h.__setitem__(13,"Almost")
+    h.__setitem__(12,"Gone")
+    h.__getitem__(12)
     print(h)
-    h.delete("13")
-    print(h.get_item(10))
+    h.delete(13)
+    print("Print New Hashmap")
+    
+    print(h)
+    print(h.__getitem__(10))
 main()

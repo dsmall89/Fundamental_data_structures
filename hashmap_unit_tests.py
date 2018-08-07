@@ -1,24 +1,36 @@
 import unittest
 from LinkedList import Node,linkedList
-from Hashmap import hashcontainer_of_hashed_elements
+from Hashmap import HashMap_practice
 
 class hashmap_test(unittest.TestCase):
     def setUp(self):
-        self.hash_map = hashcontainer_of_hashed_elements()
+        self.hash_map = HashMap_practice()
+        self.example_element= {'Donte' : 'Smallest',
+                                'Tanice': 'Smaller',
+                                'Nahleen' : 'Small'}
 
 
     def test_set_element_in_hash_map(self):
-        set_hash = hashcontainer_of_hashed_elements()
-        result= set_hash.__set__("key1","val1")
-        self.assertTrue("key1" and "val1" in result[0])
+        self.hash_map['Donte'] = self.example_element['Donte']
+        self.assertEqual(self.example_element['Donte'],self.hash_map['Donte'])
+
 
     def test_element_is_not_in_hash_map(self):
         self.assertTrue("Biggie" is not self.hash_map)
 
 
 
-    def test_set_two_elments(self):
-            pass
+    def test_delete_one_elments(self):
+        self.hash_map['Donte'] = self.example_element['Donte']
+        self.hash_map.delete('Donte')
+
+        self.assertEqual(self.hash_map['Donte'],None)
+
+        self.hash_map['Donte'] = self.example_element['Tanice']
+
+        self.assertEqual(self.example_element['Tanice'],self.hash_map['Donte'])
+
+
     #dup shows up or dont show up
 
     # def test_get_one_element_in_hash_map(self):
@@ -26,7 +38,6 @@ class hashmap_test(unittest.TestCase):
     #     result= get_hash.__set__(2,"val1")
     #     result2=result.get_item(2)
 
-        self.assertTrue(result2 == 2)
 
 
     def test_count_is_correct(self):
