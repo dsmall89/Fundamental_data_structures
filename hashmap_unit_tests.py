@@ -30,6 +30,11 @@ class hashmap_test(unittest.TestCase):
 
         self.assertEqual(self.example_element['Tanice'],self.hash_map['Donte'])
 
+    def test_delete_one_elments_not_in_hash(self):
+        with self.assertRaises(KeyError):
+            self.hash_map.delete('Chris')
+
+
 
     #dup shows up or dont show up
 
