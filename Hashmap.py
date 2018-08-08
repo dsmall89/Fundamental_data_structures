@@ -23,7 +23,7 @@ class HashMap_practice(object):
         if self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] is None:
 
             #sets the empty container to list of "key" "hash_ref_num_in_bucket"
-            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = filter(None,[hash_ref_num_in_bucket])
+            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = list([hash_ref_num_in_bucket])
 
 
         else:
@@ -40,8 +40,6 @@ class HashMap_practice(object):
 
     def __repr__(self):
         return str(self.bucket_of_hashed_elements)
-    def has_key(self,key):
-        pass
 
 
     def __getitem__(self,key):
@@ -67,6 +65,15 @@ class HashMap_practice(object):
                 return True
 
         return None
+
+    def __contain__(self, key):
+
+        if self.__get__(key):
+            return True
+        else:
+            return False
+
+
 
     def remove_empty_list(self,empty_list):
         empty_list = [t for t in  enum(empty_list) if t ]

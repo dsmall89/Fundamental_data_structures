@@ -15,27 +15,31 @@ class hashmap_test(unittest.TestCase):
         self.assertEqual(self.example_element['Donte'],self.hash_map['Donte'])
 
 
-    def test_element_is_not_in_hash_map(self):
-        self.assertTrue("Biggie" not in self.hash_map)
-
-        self.hash_map['Biggie']
-        self.assertTrue("Biggie" in self.hash_map)
+    #def test_element_is_not_in_hash_map(self):
+        # self.assertTrue("Biggie" not in self.hash_map)
+        #
+        # self.hash_map['Biggie']
+        # self.assertTrue("Biggie" in self.hash_map)
 
 
 
     def test_delete_one_elments(self):
         self.hash_map['Donte'] = self.example_element['Donte']
+
         self.hash_map.delete('Donte')
 
-        self.assertEqual(self.hash_map['Donte'],None)
 
-        self.hash_map['Donte'] = self.example_element['Tanice']
+        self.assertIsNone(self.hash_map['Donte'])
+        self.assertTrue(self.example_element['Donte'])
 
-        self.assertEqual(self.example_element['Tanice'],self.hash_map['Donte'])
 
-    def test_delete_one_elments_not_in_hash(self):
-        with self.assertRaises(KeyError):
-            self.hash_map.delete('Chris')
+        # self.hash_map['Donte'] = self.example_element['Tanice']
+        self.hash_map.__setitem__('Donte','smallest')
+        self.assertEqual(self.hash_map['Donte'],self.example_element['Tanice'])
+
+    # def test_delete_one_elment_not_in_hash(self):
+    #     with self.assertRaises(KeyError):
+    #         del self.hash_map['Chris']
 
 
 
