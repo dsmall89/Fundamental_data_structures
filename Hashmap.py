@@ -83,7 +83,6 @@ def main():
     print(h)
     h.delete(13)
     print("Print New Hashmap")
-    
+
     print(h)
     print(h.__getitem__(10))
-main()

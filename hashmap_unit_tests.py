@@ -16,7 +16,10 @@ class hashmap_test(unittest.TestCase):
 
 
     def test_element_is_not_in_hash_map(self):
-        self.assertTrue("Biggie" is not self.hash_map)
+        self.assertTrue("Biggie" not in self.hash_map)
+
+        self.hash_map['Biggie']
+        self.assertTrue("Biggie" in self.hash_map)
 
 
 
