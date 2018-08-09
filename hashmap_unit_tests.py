@@ -10,55 +10,48 @@ class hashmap_test(unittest.TestCase):
                                 'Nahleen' : 'Small'}
 
 
+
+
+
+
     def test_set_element_in_hash_map(self):
         self.hash_map['Donte'] = self.example_element['Donte']
         self.assertEqual(self.example_element['Donte'],self.hash_map['Donte'])
 
 
-    #def test_element_is_not_in_hash_map(self):
-        # self.assertTrue("Biggie" not in self.hash_map)
-        #
-        # self.hash_map['Biggie']
-        # self.assertTrue("Biggie" in self.hash_map)
+
+    #def test_element_is_in_hash_map(self):
+        #Why does this keep getting stuck in an infinite loop
+        #Also, why when switch self.hash_map an error is thrown
+         #self.assertTrue('Biggie' not in self.hash_map)
+         #self.hash_map['Biggie'] = 'Small'
+
+         #self.assertTrue('Biggie' in self.hash_map)
 
 
 
     def test_delete_one_elments(self):
-        self.hash_map['Donte'] = self.example_element['Donte']
+        #add the item to the hash map
+        #if this line is removed the test will break, why ?
+        self.hash_map['another_test_key']= 'another_test_value'
 
-        self.hash_map.delete('Donte')
+        self.assertTrue(self.hash_map['another_test_key'], 'another_test_value')
+        self.hash_map.delete('another_test_key')
 
+        #assert that key is removed
+        self.assertTrue('another_test_key', None )
 
-        self.assertIsNone(self.hash_map['Donte'])
-        self.assertTrue(self.example_element['Donte'])
-
-
-        # self.hash_map['Donte'] = self.example_element['Tanice']
-        self.hash_map.__setitem__('Donte','smallest')
-        self.assertEqual(self.hash_map['Donte'],self.example_element['Tanice'])
-
-    # def test_delete_one_elment_not_in_hash(self):
-    #     with self.assertRaises(KeyError):
-    #         del self.hash_map['Chris']
+    # def test_delele_correct_element(self):
+    #     self.hash_map[3]= 'another_test_value'
+    # Should verifty the number is correct, I already know my delete function is returning True
+    #     self.assertFalse(self.hash_map.delete(3),3)
 
 
 
-    #dup shows up or dont show up
+    def test_delete_one_elment_not_in_hash(self):
 
-    # def test_get_one_element_in_hash_map(self):
-    #     get_hash = hashcontainer_of_hashed_elements()
-    #     result= get_hash.__set__(2,"val1")
-    #     result2=result.get_item(2)
-
-
-
-    def test_count_is_correct(self):
-        pass
-
-    def test_count_decreases_after_element_is_deleted(self):
-        pass
-
-
+        with self.assertRaises(KeyError):
+                self.hash_map['Not existent']
 
 
 

@@ -42,15 +42,24 @@ class HashMap_practice(object):
         return str(self.bucket_of_hashed_elements)
 
 
-    def __getitem__(self,key):
+    def __getitem__(self,key,default = None):
         key_hash_ref_num_in_bucket = self.get_hash(key)
         if self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket] is not None:
 
             for pair in self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket]:
 
                 if pair[0] == key:
+
                     return pair[1]
-        return None
+                else:
+                    return default
+        #import pdb; pdb.set_trace()
+
+        raise KeyError(key)
+        #important lesson here regrading writing unittest, if you expect to raise a KeyError then it has to be present
+        #Also,None is a good choice to return but the unittest is expecting you to raise a KeyError given a test case
+    def __repr__(slef):
+        return "Hash (value = %s)" % self.bucket_of_hashed_elements
 
 
     def delete(self,key):
