@@ -1,7 +1,26 @@
 
 from LinkedList import linkedList,Node
 
-class HashMap_practice(object):
+class HashMap(object):
+    def __init__(self):
+        self._table = HashTable()
+
+    def __setitem__(self, key, value):
+        self._table[key] = value
+    #
+    def __getitem__(self,key):
+        return self._table[key]
+
+    def __contains__(self,key):
+        #think proxy
+        return key in self._table
+
+    def delete(self, key):
+        return self._table.delete(key)
+
+
+
+class HashTable(object):
     def __init__(self):
         self.size = 8
         self.bucket_of_hashed_elements= [None] * self.size

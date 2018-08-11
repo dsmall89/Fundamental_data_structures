@@ -1,10 +1,10 @@
 import unittest
 from LinkedList import Node,linkedList
-from Hashmap import HashMap_practice
+from Hashmap import HashMap
 
 class hashmap_test(unittest.TestCase):
     def setUp(self):
-        self.hash_map = HashMap_practice()
+        self.hash_map = HashMap()
         self.example_element= {'Donte' : 'Smallest',
                                 'Tanice': 'Smaller',
                                 'Nahleen' : 'Small'}
