@@ -1,6 +1,7 @@
 import unittest
 from LinkedList import Node,linkedList
-from Hashmap import HashMap
+from Hashmap import HashMap,HashSet
+
 
 class hashmap_test(unittest.TestCase):
     def setUp(self):
@@ -31,11 +32,11 @@ class hashmap_test(unittest.TestCase):
         #if this line is removed the test will break, why ?
         self.hash_map['another_test_key']= 'another_test_value'
 
-        self.assertTrue(self.hash_map['another_test_key'], 'another_test_value')
+        self.assertEqual(self.hash_map['another_test_key'], 'another_test_value')
         self.hash_map.delete('another_test_key')
 
         #assert that key is removed
-        self.assertTrue('another_test_key', None )
+        self.assertNotIn('another_test_key', self.hash_map )
 
     # def test_delele_correct_element(self):
     #     self.hash_map[3]= 'another_test_value'
@@ -49,7 +50,11 @@ class hashmap_test(unittest.TestCase):
         with self.assertRaises(KeyError):
                 self.hash_map['Not existent']
 
-
+class HashSetTest(unittest.TestCase):
+    def test_added_item_is_in_set(self):
+        s = HashSet()
+        s.add("Donte")
+        self.assertIn("Donte", s)
 
 
 

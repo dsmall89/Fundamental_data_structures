@@ -9,6 +9,7 @@ class HashMap(object):
         self._table[key] = value
     #
     def __getitem__(self,key):
+        #return self._table.__getitem__(key)
         return self._table[key]
 
     def __contains__(self,key):
@@ -17,6 +18,28 @@ class HashMap(object):
 
     def delete(self, key):
         return self._table.delete(key)
+
+class HashSet(object):
+    def __init__(self):
+        self.container= HashTable()
+
+    def add(self,item):
+        self.container[item] = item
+
+    def __contains__(self,item):
+        # it passed, Yay !!!
+        return item in self.container
+
+    def count(self,item):
+        return len(self.container)
+    def issubset(self,set1, set2):
+        set1 = self.container
+        if set1 in set2:
+            return True
+        else:
+            return False
+
+
 
 
 
