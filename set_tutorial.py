@@ -2,6 +2,7 @@ import string
 class set_tutorial(object):
 
     def __init__(self, *args):
+      #allows that function to accept an arbitrary number of arguments 
       self.__dict = {}
       for arg in args:
         self.add(arg)

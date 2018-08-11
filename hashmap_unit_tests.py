@@ -10,23 +10,19 @@ class hashmap_test(unittest.TestCase):
                                 'Nahleen' : 'Small'}
 
 
-
-
-
-
     def test_set_element_in_hash_map(self):
         self.hash_map['Donte'] = self.example_element['Donte']
         self.assertEqual(self.example_element['Donte'],self.hash_map['Donte'])
 
 
 
-    #def test_element_is_in_hash_map(self):
-        #Why does this keep getting stuck in an infinite loop
-        #Also, why when switch self.hash_map an error is thrown
-         #self.assertTrue('Biggie' not in self.hash_map)
-         #self.hash_map['Biggie'] = 'Small'
+    def test_element_is_in_hash_map(self):
+        # Why does this keep getting stuck in an infinite loop
+        # Also, why when switch self.hash_map an error is thrown
+         self.assertTrue('Biggie' not in self.hash_map)
+         self.hash_map['Biggie'] = 'Small'
 
-         #self.assertTrue('Biggie' in self.hash_map)
+         self.assertTrue('Biggie' in self.hash_map)
 
 
 

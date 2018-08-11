@@ -5,51 +5,43 @@ class HashMap_practice(object):
     def __init__(self):
         self.size = 8
         self.bucket_of_hashed_elements= [None] * self.size
+
     def get_hash(self,key):
         hash = 0
-        for indx_hash_ref_num_in_bucket in str(key):
-            hash += ord(indx_hash_ref_num_in_bucket)
+        for character in str(key):
+            hash += ord(character)
             calculatated_hash_ref_num_in_buckets = hash % self.size
 
         return calculatated_hash_ref_num_in_buckets
 
-    def __setitem__(self,key, hash_ref_num_in_bucket):
-        # gets the key
-        indx_of_key_hash_ref_num_in_bucket = self.get_hash(key)
+    def __setitem__(self, key, value):
+        key_index = self.get_hash(key)
+        new_pair = [key, value]
 
-        #creates key + hash_ref_num_in_bucket pairs
-        hash_ref_num_in_bucket = [key,hash_ref_num_in_bucket]
-
-        if self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] is None:
-
-            #sets the empty container to list of "key" "hash_ref_num_in_bucket"
-            self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket] = list([hash_ref_num_in_bucket])
-
+        if self.bucket_of_hashed_elements[key_index] is None:
+            #sets the empty container to list of "key" "value"
+            self.bucket_of_hashed_elements[key_index] = list([new_pair])
 
         else:
             # if not empty, check if element at indx[0] equals key
-            print self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket],
-            for pair in self.bucket_of_hashed_elements[indx_of_key_hash_ref_num_in_bucket]:
-
+            for pair in self.bucket_of_hashed_elements[key_index]:
                 if pair[0] == key:
-                    print(pair[0])
-                    # if so, then the element at indx[1] corresponds to its hash_ref_num_in_bucket
-                    pair[1] = hash_ref_num_in_bucket
-                    self.map[indx_of_key_hash_ref_num_in_bucket].append(key_hash_ref_num_in_bucket)
+                    # if so, then the element at indx[1] corresponds to its value
+                    pair[1] = value
+                    self.map[key_index].append(new_pair)
                     return True
+                # Note that if there's a hash collision we don't add the item
 
     def __repr__(self):
         return str(self.bucket_of_hashed_elements)
 
 
     def __getitem__(self,key,default = None):
-        key_hash_ref_num_in_bucket = self.get_hash(key)
-        if self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket] is not None:
+        key_index = self.get_hash(key)
+        if self.bucket_of_hashed_elements[key_index] is not None:
 
-            for pair in self.bucket_of_hashed_elements[key_hash_ref_num_in_bucket]:
-
+            for pair in self.bucket_of_hashed_elements[key_index]:
                 if pair[0] == key:
-
                     return pair[1]
                 else:
                     return default
@@ -58,31 +50,29 @@ class HashMap_practice(object):
         raise KeyError(key)
         #important lesson here regrading writing unittest, if you expect to raise a KeyError then it has to be present
         #Also,None is a good choice to return but the unittest is expecting you to raise a KeyError given a test case
-    def __repr__(slef):
+    def __repr__(self):
         return "Hash (value = %s)" % self.bucket_of_hashed_elements
 
 
     def delete(self,key):
-        hash_ref_num_in_bucket = self.get_hash(key)
-        if self.bucket_of_hashed_elements[hash_ref_num_in_bucket] is None:
+        key_index = self.get_hash(key)
+        if self.bucket_of_hashed_elements[key_index] is None:
             return None
 
 
-        for index in range (0,len(self.bucket_of_hashed_elements[hash_ref_num_in_bucket])):
-            if self.bucket_of_hashed_elements[hash_ref_num_in_bucket][index][0] == key:
-                self.bucket_of_hashed_elements[hash_ref_num_in_bucket].pop(index)
+        for index in range (0,len(self.bucket_of_hashed_elements[key_index])):
+            if self.bucket_of_hashed_elements[key_index][index][0] == key:
+                self.bucket_of_hashed_elements[key_index].pop(index)
                 return True
 
         return None
 
-    def __contain__(self, key):
-
-        if self.__get__(key):
+    def __contains__(self, key):
+        try:
+            self.__getitem__(key)
             return True
-        else:
+        except KeyError:
             return False
-
-
 
     def remove_empty_list(self,empty_list):
         empty_list = [t for t in  enum(empty_list) if t ]
