@@ -18,3 +18,11 @@ class set_tutorial(object):
 
     def add(self, item):
         self.__dict[item] = item
+
+    def remove(self, item):
+        del self.__dict[item]
+
+    def __len__(self):
+        return iter(self.__dict.copy())
+    def difference(self,item):
+        pass
