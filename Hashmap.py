@@ -32,12 +32,33 @@ class HashSet(object):
 
     def count(self,item):
         return len(self.container)
-    def issubset(self,set1, set2):
+
+    def isSubset(self,set1, set2):
         set1 = self.container
+
         if set1 in set2:
             return True
         else:
             return False
+
+    def union(self, set1, set2):
+
+        bucket = self.container
+        for item in set1:
+            for item in set2:
+                if item in set1 or set2:
+                    bucket.add(item)
+        return bucket
+
+    def intersect(self,set1,set2):
+        if count(set1) > count(set2):
+            set1,set2 = set2,set1
+
+            result = self.container
+            for item in set1 :
+                if item in set2:
+                    result.add(item)
+            return result
 
 
 

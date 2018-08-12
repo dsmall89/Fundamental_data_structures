@@ -56,6 +56,13 @@ class HashSetTest(unittest.TestCase):
         s.add("Donte")
         self.assertIn("Donte", s)
 
+    def test_union_of_sets(self):
+        s = HashSet()
+        s = {1,2,4,6}
+        d= {1,3,5,7}
+        result = {1,2,3,4,5,6,7}
+        self.assertEqual(s.union(d), result)
+
 
 
 
