@@ -30,16 +30,26 @@ class HashSet(object):
         # it passed, Yay !!!
         return item in self.container
 
-    def count(self,item):
-        return len(self.container)
+    def __len__(self):
+        return self.container
 
-    def isSubset(self,set1, set2):
+    def isSubset(self,set2):
+        set1 = self.container
+        for item in set1 and set2:
+
+            if item in set2:
+                return True
+            else:
+                return False
+
+    def isSuperSet(self, set1, set2):
         set1 = self.container
 
-        if set1 in set2:
-            return True
-        else:
-            return False
+        for item in set2:
+            if item in set1:
+                return True
+            else:
+                return False
 
     def union(self, set1, set2):
 
