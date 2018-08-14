@@ -70,12 +70,19 @@ class HashSetTest(unittest.TestCase):
 
         self.assertIn(s.isSubset(d),d)
 
-    def test_if_difference(self):
+    # def test_if_difference(self):
+    #     s = HashSet()
+    #     s.add({'a', 'b', 'c', 'd'})
+    #     d = {'c', 'f', 'g'}
+    #     result = {'b', 'a', 'd'}
+    #     self.assertEqual(s.my_difference(d), result)
+
+    def test_len_method(self):
         s = HashSet()
-        s = {'a', 'b', 'c', 'd'}
-        d = {'c', 'f', 'g'}
-        result = {'b', 'a', 'd'}
-        self.assertEqual(s.difference(d), result)
+        s.add("One")
+        
+
+        self.assertEqual(len(s),1)
 
 
     def test_if_symmetric_difference(self):

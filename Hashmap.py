@@ -20,8 +20,12 @@ class HashMap(object):
         return self._table.delete(key)
 
 class HashSet(object):
-    def __init__(self):
-        self.container= HashTable()
+    def __init__(self, container=None):
+        if container == None:
+            self.container= {}
+        else:
+            self.container= HashTable()
+
 
     def add(self,item):
         self.container[item] = item
@@ -31,7 +35,7 @@ class HashSet(object):
         return item in self.container
 
     def __len__(self):
-        return self.container
+        return len(self.container)
 
     def isSubset(self,set2):
         set1 = self.container
@@ -70,13 +74,16 @@ class HashSet(object):
                     result.add(item)
             return result
 
-    def difference(self,set1,set2):
-        bucket = self.container
-        for item in set1:
-            for item in set2:
-                if item not in set2:
-                    bucket.add(item)
-        return set1
+    def my_difference(self,other):
+        try:
+            bucket = self.container
+            for item in bucket:
+                for item in other:
+                    if item not in other:
+                        bucket.add(item)
+            return bucket
+        except KeyError:
+            return False
 
 
 
