@@ -66,9 +66,20 @@ class HashSetTest(unittest.TestCase):
     def test_if_subset(self):
         s = HashSet()
         s.add("{1,2,3}")
-        d = {1,2,3,4,5,6,7,}
+        d = {1,2,3,4,5,6,7}
 
         self.assertIn(s.isSubset(d),d)
+
+    def test_if_difference(self):
+        s = HashSet()
+        s.add("{'a', 'b', 'c', 'd'}")
+        d = {'c', 'f', 'g'}
+        result = {'b', 'a', 'd'}
+        self.assertEqual(s.difference(d), result)
+
+
+    def test_if_symmetric_difference(self):
+        pass
 
 
 

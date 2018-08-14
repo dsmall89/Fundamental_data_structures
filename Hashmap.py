@@ -61,7 +61,7 @@ class HashSet(object):
         return bucket
 
     def intersect(self,set1,set2):
-        if count(set1) > count(set2):
+        if len(set1) > len(set2):
             set1,set2 = set2,set1
 
             result = self.container
@@ -69,6 +69,18 @@ class HashSet(object):
                 if item in set2:
                     result.add(item)
             return result
+
+    def difference(self,set2):
+
+            try:
+                result = self.container
+                for item in result :
+                    if item not in set2:
+                        result.add(item)
+                        return result
+            except KeyError:
+                return set2
+
 
 
 
