@@ -76,13 +76,40 @@ class HashSetTest(unittest.TestCase):
     #     d = {'c', 'f', 'g'}
     #     result = {'b', 'a', 'd'}
     #     self.assertEqual(s.my_difference(d), result)
+    def test_len_is_zero(self):
+        s= HashSet()
+        self.assertEqual(len(s),0)
 
     def test_len_method(self):
         s = HashSet()
         s.add("One")
-        
-
         self.assertEqual(len(s),1)
+    def test_len_with_multiple_items(self):
+        s = HashSet()
+        s.add("One")
+        s.add("two")
+        s.add("three")
+
+        self.assertEqual(len(s),3)
+    def test_len_with_multiple_items_in_two_buckets(self):
+        s = HashSet()
+        s.add("One")
+        s.add("two")
+        s.add("three")
+        self.assertEqual(len(s),3)
+
+        s2=HashSet()
+        s2.add("four")
+        s2.add("five")
+        s2.add("six")
+        s2.add("seven")
+        self.assertEqual(len(s2),4)
+
+
+
+
+
+
 
 
     def test_if_symmetric_difference(self):
