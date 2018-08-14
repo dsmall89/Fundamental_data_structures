@@ -70,16 +70,15 @@ class HashSet(object):
                     result.add(item)
             return result
 
-    def difference(self,set2):
+    def difference(self,set1,set2):
+        bucket = self.container
+        for item in set1:
+            for item in set2:
+                if item not in set2:
+                    bucket.add(item)
+        return set1
 
-            try:
-                result = self.container
-                for item in result :
-                    if item not in set2:
-                        result.add(item)
-                        return result
-            except KeyError:
-                return set2
+
 
 
 

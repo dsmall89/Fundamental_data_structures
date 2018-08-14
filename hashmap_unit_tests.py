@@ -72,7 +72,7 @@ class HashSetTest(unittest.TestCase):
 
     def test_if_difference(self):
         s = HashSet()
-        s.add("{'a', 'b', 'c', 'd'}")
+        s = {'a', 'b', 'c', 'd'}
         d = {'c', 'f', 'g'}
         result = {'b', 'a', 'd'}
         self.assertEqual(s.difference(d), result)
