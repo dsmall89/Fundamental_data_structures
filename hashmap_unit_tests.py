@@ -47,10 +47,14 @@ class hashmap_test(unittest.TestCase):
 
     def test_delete_one_elment_not_in_hash(self):
 
+
         with self.assertRaises(KeyError):
                 self.hash_map['Not existent']
 
 class HashSetTest(unittest.TestCase):
+    def setUp(self):
+        self.set = HashSet()
+
     def test_added_item_is_in_set(self):
         s = HashSet()
         s.add("Donte")
@@ -84,6 +88,7 @@ class HashSetTest(unittest.TestCase):
         s = HashSet()
         s.add("One")
         self.assertEqual(len(s),1)
+
     def test_len_with_multiple_items(self):
         s = HashSet()
         s.add("One")
@@ -91,7 +96,25 @@ class HashSetTest(unittest.TestCase):
         s.add("three")
 
         self.assertEqual(len(s),3)
+
+    def test_if_two_in_same_bucket(self):
+        s= HashSet()
+        s.add("one")
+        self.assertIn("one", s)
+        s.add("two")
+        self.assertIn("one", s)
+        self.assertIn("two", s)
+
+    def test_doesnt_misidentify_an_item_with_the_same_hash(self):
+        # We assume one and two have the same hash
+        self.assertEquals(self.set.container.get_hash("one"), self.set.container.get_hash("two"))
+
+        self.set.add("one")
+        self.assertIn("one", self.set)
+        self.assertNotIn("two", self.set)
+
     def test_len_with_multiple_items_in_two_buckets(self):
+
         s = HashSet()
         s.add("One")
         s.add("two")
@@ -104,11 +127,6 @@ class HashSetTest(unittest.TestCase):
         s2.add("six")
         s2.add("seven")
         self.assertEqual(len(s2),4)
-
-
-
-
-
 
 
 

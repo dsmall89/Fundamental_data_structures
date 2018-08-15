@@ -20,11 +20,8 @@ class HashMap(object):
         return self._table.delete(key)
 
 class HashSet(object):
-    def __init__(self, container=None):
-        if container == None:
-            self.container= {}
-        else:
-            self.container= HashTable()
+    def __init__(self):
+        self.container= HashTable()
 
 
     def add(self,item):
@@ -58,8 +55,8 @@ class HashSet(object):
     def union(self, set1, set2):
 
         bucket = self.container
-        for item in set1:
-            for item in set2:
+        for my_item in self:
+            for other_item in set2:
                 if item in set1 or set2:
                     bucket.add(item)
         return bucket
@@ -76,12 +73,11 @@ class HashSet(object):
 
     def my_difference(self,other):
         try:
-            bucket = self.container
-            for item in bucket:
+            for item in self.container:
                 for item in other:
                     if item not in other:
-                        bucket.add(item)
-            return bucket
+                        self.container.add(item)
+            return self.container
         except KeyError:
             return False
 
@@ -94,8 +90,14 @@ class HashSet(object):
 
 class HashTable(object):
     def __init__(self):
+            #pigeonhole principle, used when you have more than one item in a bucket
+            #it gets counted correctly !
         self.size = 8
-        self.bucket_of_hashed_elements= [None] * self.size
+        self.__bucket = [[] for _ in range(0, self.size)]
+
+
+    def __len__(self):
+        return sum(len(b) for b in self.__bucket)
 
     def get_hash(self,key):
         hash = 0
@@ -109,51 +111,57 @@ class HashTable(object):
         key_index = self.get_hash(key)
         new_pair = [key, value]
 
-        if self.bucket_of_hashed_elements[key_index] is None:
-            #sets the empty container to list of "key" "value"
-            self.bucket_of_hashed_elements[key_index] = list([new_pair])
+        # At this point, there's already a bucket with items
+        # So we iterate through teh __bucket
+        for pair in self.__bucket[key_index]:
+            if pair[0] == key:
+                pair[1] = value
+                #only returns if we found a match, per 125 (match found!)
+                return
+        self.__bucket[key_index].append(new_pair)
 
-        else:
-            # if not empty, check if element at indx[0] equals key
-            for pair in self.bucket_of_hashed_elements[key_index]:
-                if pair[0] == key:
-                    # if so, then the element at indx[1] corresponds to its value
-                    pair[1] = value
-                    self.map[key_index].append(new_pair)
-                    return True
+
+
+
+            # if the key is not in the bucket we add it to the bucket
+
+
+
+
+
+
+
+
+
+
                 # Note that if there's a hash collision we don't add the item
 
     def __repr__(self):
-        return str(self.bucket_of_hashed_elements)
+        return str(self.__bucket)
 
 
-    def __getitem__(self,key,default = None):
+
+
+
+    def __getitem__(self, key):
         key_index = self.get_hash(key)
-        if self.bucket_of_hashed_elements[key_index] is not None:
-
-            for pair in self.bucket_of_hashed_elements[key_index]:
-                if pair[0] == key:
-                    return pair[1]
-                else:
-                    return default
-        #import pdb; pdb.set_trace()
+        for pair in self.__bucket[key_index]:
+            if pair[0] == key:
+                return pair[1]
 
         raise KeyError(key)
         #important lesson here regrading writing unittest, if you expect to raise a KeyError then it has to be present
         #Also,None is a good choice to return but the unittest is expecting you to raise a KeyError given a test case
     def __repr__(self):
-        return "Hash (value = %s)" % self.bucket_of_hashed_elements
+        return "Hash (value = %s)" % self.__bucket
 
 
     def delete(self,key):
         key_index = self.get_hash(key)
-        if self.bucket_of_hashed_elements[key_index] is None:
-            return None
 
-
-        for index in range (0,len(self.bucket_of_hashed_elements[key_index])):
-            if self.bucket_of_hashed_elements[key_index][index][0] == key:
-                self.bucket_of_hashed_elements[key_index].pop(index)
+        for index in range (0,len(self.__bucket[key_index])):
+            if self.__bucket[key_index][index][0] == key:
+                self.__bucket[key_index].pop(index)
                 return True
 
         return None
