@@ -21,6 +21,8 @@ class HashMap(object):
 
 class HashSet(object):
     def __init__(self):
+
+        self.count = 0
         self.container= HashTable()
 
 
@@ -34,6 +36,18 @@ class HashSet(object):
     def __len__(self):
         return len(self.container)
 
+    def __iter__(self):
+
+        return iter(self.container)
+
+    def next(self):
+      self.count += 1
+      if self.count > self.container:
+          raise StopIteration
+      else:
+          for x in self:
+              yield x
+
     def isSubset(self,set2):
         set1 = self.container
         for item in set1 and set2:
@@ -42,6 +56,8 @@ class HashSet(object):
                 return True
             else:
                 return False
+    def __repr__(self):
+        return str(self.container)
 
     def isSuperSet(self, set1, set2):
         set1 = self.container
@@ -52,14 +68,21 @@ class HashSet(object):
             else:
                 return False
 
-    def union(self, set1, set2):
-
-        bucket = self.container
-        for my_item in self:
-            for other_item in set2:
-                if item in set1 or set2:
-                    bucket.add(item)
+    def union(self, set1):
+        bucket = []
+        for i in self:
+            #should copy all the values into bucket
+            if i in set1 or self:
+                    #should check if value is not in self,
+                    #then add value bucket
+                bucket.append(i)
+            else:
+                return False
         return bucket
+
+
+
+
 
     def intersect(self,set1,set2):
         if len(set1) > len(set2):
@@ -82,22 +105,20 @@ class HashSet(object):
             return False
 
 
-
-
-
-
-
-
 class HashTable(object):
     def __init__(self):
             #pigeonhole principle, used when you have more than one item in a bucket
             #it gets counted correctly !
         self.size = 8
         self.__bucket = [[] for _ in range(0, self.size)]
-
+    def __iter__(self):
+        return self
 
     def __len__(self):
         return sum(len(b) for b in self.__bucket)
+    def __iter__(self):
+        return iter(self.__bucket)
+
 
     def get_hash(self,key):
         hash = 0
@@ -112,36 +133,18 @@ class HashTable(object):
         new_pair = [key, value]
 
         # At this point, there's already a bucket with items
-        # So we iterate through teh __bucket
+        # So we iterate through the __bucket
         for pair in self.__bucket[key_index]:
             if pair[0] == key:
                 pair[1] = value
                 #only returns if we found a match, per 125 (match found!)
                 return
         self.__bucket[key_index].append(new_pair)
-
-
-
-
             # if the key is not in the bucket we add it to the bucket
-
-
-
-
-
-
-
-
-
-
-                # Note that if there's a hash collision we don't add the item
+            # Note that if there's a hash collision we don't add the item
 
     def __repr__(self):
         return str(self.__bucket)
-
-
-
-
 
     def __getitem__(self, key):
         key_index = self.get_hash(key)
