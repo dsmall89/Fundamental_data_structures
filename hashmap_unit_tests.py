@@ -145,6 +145,16 @@ class HashSetTest(unittest.TestCase):
 
         for house, saying in self.hashmap:
             self.assertEqual(self.example_element[house], saying)
+    def test_next(self):
+        s4 = HashSet()
+        s2.add("4")
+        s2.add("5")
+
+        it = iter(s4)
+        result = next(it)
+
+        assertEqual(result,"5")
+
 
 
 

@@ -41,7 +41,7 @@ class HashSet(object):
         return self.container
 
     def next(self):
-          for (x,y) in len(self.container):
+          for (x,y) in self.container:
               yield x,y
 
 
