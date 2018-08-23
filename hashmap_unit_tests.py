@@ -139,8 +139,12 @@ class HashSetTest(unittest.TestCase):
 
 
 
-    def test_if_symmetric_difference(self):
-        pass
+    def test_iteration(self):
+        for house, saying in self.example_element.items():
+            self.hashmap[house] = saying
+
+        for house, saying in self.hashmap:
+            self.assertEqual(self.example_element[house], saying)
 
 
 

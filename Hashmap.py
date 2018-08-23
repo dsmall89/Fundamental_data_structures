@@ -38,15 +38,12 @@ class HashSet(object):
 
     def __iter__(self):
 
-        return iter(self.container)
+        return self.container
 
     def next(self):
-      self.count += 1
-      if self.count > self.container:
-          raise StopIteration
-      else:
-          for x in self:
-              yield x
+          for (x,y) in len(self.container):
+              yield x,y
+
 
     def isSubset(self,set2):
         set1 = self.container
@@ -71,13 +68,12 @@ class HashSet(object):
     def union(self, set1):
         bucket = []
         for i in self:
+            bucket.append(i)
             #should copy all the values into bucket
-            if i in set1 or self:
+            if i not in enumerate(set1):
                     #should check if value is not in self,
                     #then add value bucket
                 bucket.append(i)
-            else:
-                return False
         return bucket
 
 
