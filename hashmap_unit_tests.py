@@ -153,7 +153,7 @@ class HashSetTest(unittest.TestCase):
         it = iter(s4)
         result = next(it)
 
-        assertEqual(result,"5")
+        self.assertEqual(result,"5")
 
 
 
