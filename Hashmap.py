@@ -22,7 +22,7 @@ class HashMap(object):
 class HashSet(object):
     def __init__(self):
 
-        self.count = 0
+        self.index = 0
         self.container= HashTable()
 
 
@@ -37,12 +37,26 @@ class HashSet(object):
         return len(self.container)
 
     def __iter__(self):
+        # import pdb; pdb.set_trace()
+        for k, _ in self.container:
+            yield k
 
-        return self.container
+    #     return iterator
+    #
+    # def __next__(self):
+    #     if self.index >= len(self.container):
+    #         raise StopIteration
+    #
+    #     obj = self.container[self.index]
+    #     self.index += 1
+    #     return obj
+    #
+    #     for k, _ in self.container:
+    #         yield k
 
-    def next(self):
-          for (x,y) in self.container:
-              yield x,y
+    # def next(self):
+    #
+    #     return self.container.__next__()
 
 
     def isSubset(self,set2):
@@ -67,14 +81,15 @@ class HashSet(object):
 
     def union(self, set1):
         bucket = []
-        for i in self:
-            bucket.append(i)
-            #should copy all the values into bucket
-            if i not in enumerate(set1):
-                    #should check if value is not in self,
-                    #then add value bucket
-                bucket.append(i)
-        return bucket
+        for idx in self.container:
+            for jx in idx:
+                bucket.append(jx)
+                #should copy all the values into bucket
+                if i not in enumerate(set1):
+                        #should check if value is not in self,
+                        #then add value bucket
+                    bucket.append(i)
+            return bucket
 
 
 
@@ -106,14 +121,17 @@ class HashTable(object):
             #pigeonhole principle, used when you have more than one item in a bucket
             #it gets counted correctly !
         self.size = 8
-        self.__bucket = [[] for _ in range(0, self.size)]
-    def __iter__(self):
-        return self
+        self._buckets = [[] for _ in range(0, self.size)]
 
     def __len__(self):
-        return sum(len(b) for b in self.__bucket)
+        return sum(len(b) for b in self._buckets)
+
     def __iter__(self):
-        return iter(self.__bucket)
+        #just need to iterate over the key value
+
+         for bucket in self._buckets:
+             for pair in bucket:
+                 yield pair
 
 
     def get_hash(self,key):
@@ -129,38 +147,36 @@ class HashTable(object):
         new_pair = [key, value]
 
         # At this point, there's already a bucket with items
-        # So we iterate through the __bucket
-        for pair in self.__bucket[key_index]:
+        # So we iterate through the _buckets
+        for pair in self._buckets[key_index]:
             if pair[0] == key:
                 pair[1] = value
                 #only returns if we found a match, per 125 (match found!)
                 return
-        self.__bucket[key_index].append(new_pair)
+        self._buckets[key_index].append(new_pair)
             # if the key is not in the bucket we add it to the bucket
             # Note that if there's a hash collision we don't add the item
 
     def __repr__(self):
-        return str(self.__bucket)
+        return self._buckets
 
     def __getitem__(self, key):
         key_index = self.get_hash(key)
-        for pair in self.__bucket[key_index]:
+        for pair in self._buckets[key_index]:
             if pair[0] == key:
                 return pair[1]
 
         raise KeyError(key)
         #important lesson here regrading writing unittest, if you expect to raise a KeyError then it has to be present
         #Also,None is a good choice to return but the unittest is expecting you to raise a KeyError given a test case
-    def __repr__(self):
-        return "Hash (value = %s)" % self.__bucket
 
 
     def delete(self,key):
         key_index = self.get_hash(key)
 
-        for index in range (0,len(self.__bucket[key_index])):
-            if self.__bucket[key_index][index][0] == key:
-                self.__bucket[key_index].pop(index)
+        for index in range (0,len(self._buckets[key_index])):
+            if self._buckets[key_index][index][0] == key:
+                self._buckets[key_index].pop(index)
                 return True
 
         return None

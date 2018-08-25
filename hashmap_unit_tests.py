@@ -1,6 +1,6 @@
 import unittest
 from LinkedList import Node,linkedList
-from Hashmap import HashMap,HashSet
+from Hashmap import HashMap,HashSet,HashTable
 
 
 class hashmap_test(unittest.TestCase):
@@ -50,6 +50,15 @@ class hashmap_test(unittest.TestCase):
 
         with self.assertRaises(KeyError):
                 self.hash_map['Not existent']
+
+class HashTableTest(unittest.TestCase):
+    def test_next_with_one_item_returns_key_and_value(self):
+        t = HashTable()
+        t["Donte"] = "Small"
+        i = iter(t)
+        pair = next(i)
+        self.assertEqual(["Donte", "Small"], pair)
+
 
 class HashSetTest(unittest.TestCase):
     def setUp(self):
@@ -145,15 +154,16 @@ class HashSetTest(unittest.TestCase):
 
         for house, saying in self.hashmap:
             self.assertEqual(self.example_element[house], saying)
+
     def test_next(self):
         s4 = HashSet()
-        s2.add("4")
-        s2.add("5")
+        s4.add('MoveOut')
+
 
         it = iter(s4)
         result = next(it)
 
-        self.assertEqual(result,"5")
+        self.assertEqual("MoveOut", result)
 
 
 
