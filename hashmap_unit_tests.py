@@ -71,33 +71,40 @@ class HashSetTest(unittest.TestCase):
 
     def test_union_of_sets(self):
 
+
         sx = HashSet()
-        sx.add("1")
-        sx.add("2")
-        sx.add("4")
-        sx.add("6")
+        sx.add('1')
+        sx.add('2')
+        sx.add('4')
+        sx.add('6')
 
         dx = HashSet()
-        dx.add("1")
-        dx.add("3")
-        dx.add("5")
-        dx.add("7")
-        result = [1,2,3,4,5,7]
+        dx.add('1')
+        dx.add('3')
+        dx.add('5')
+        dx.add('7')
+        result = ['1', '2', '4', '6', '3', '5', '7']
         self.assertEqual(sx.union(dx), result)
 
     def test_if_subset(self):
-        s = HashSet()
-        s.add("{1,2,3}")
-        d = {1,2,3,4,5,6,7}
+        sx = HashSet()
+        sx.add('1')
+        sx.add('2')
+        sx.add('3')
+        d = ['1','2','3','4','5','6','7']
+        #Would be wise to use AssertIn,but returning True or False
+        self.assertTrue(sx.isSubset(d),d)
 
-        self.assertIn(s.isSubset(d),d)
-
-    # def test_if_difference(self):
-    #     s = HashSet()
-    #     s.add({'a', 'b', 'c', 'd'})
-    #     d = {'c', 'f', 'g'}
-    #     result = {'b', 'a', 'd'}
-    #     self.assertEqual(s.my_difference(d), result)
+    def test_if_difference(self):
+        # I'm aware of Sorting issue
+        sx = HashSet()
+        sx.add('a')
+        sx.add('b')
+        sx.add('c')
+        sx.add('d')
+        d = ['c', 'f', 'g']
+        result = ['a', 'b','d']
+        self.assertEqual(sx.my_difference(d), result)
     def test_len_is_zero(self):
         s= HashSet()
         self.assertEqual(len(s),0)
@@ -148,12 +155,12 @@ class HashSetTest(unittest.TestCase):
 
 
 
-    def test_iteration(self):
-        for house, saying in self.example_element.items():
-            self.hashmap[house] = saying
-
-        for house, saying in self.hashmap:
-            self.assertEqual(self.example_element[house], saying)
+    # def test_iteration(self):
+    #     for house, saying in self.example_element.items():
+    #         self.hashmap[house] = saying
+    #
+    #     for house, saying in self.hashmap:
+    #         self.assertEqual(self.example_element[house], saying)
 
     def test_next(self):
         s4 = HashSet()

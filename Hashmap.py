@@ -59,21 +59,19 @@ class HashSet(object):
     #     return self.container.__next__()
 
 
-    def isSubset(self,set2):
-        set1 = self.container
-        for item in set1 and set2:
+    def isSubset(self,set1):
 
-            if item in set2:
+        for item in self:
+
+            if item in set1 and self:
                 return True
-            else:
-                return False
+
     def __repr__(self):
         return str(self.container)
 
-    def isSuperSet(self, set1, set2):
-        set1 = self.container
+    def isSuperSet(self, set1):
 
-        for item in set2:
+        for item in self:
             if item in set1:
                 return True
             else:
@@ -81,18 +79,19 @@ class HashSet(object):
 
     def union(self, set1):
         bucket = []
-        for idx in self.container:
-            for jx in idx:
-                bucket.append(jx)
+        #import pdb; pdb.set_trace()
+        for idx in self:
+            bucket.append(idx)
                 #should copy all the values into bucket
-                if i not in enumerate(set1):
+        for other in set1:
+            if other not in self:
+                bucket.append(other)
                         #should check if value is not in self,
                         #then add value bucket
-                    bucket.append(i)
-            return bucket
+        # li_dif = [i for i in self if i in self or i in set1]
+        # s = [ x for x in self if x in set1 ]
 
-
-
+        return  bucket
 
 
     def intersect(self,set1,set2):
@@ -106,14 +105,12 @@ class HashSet(object):
             return result
 
     def my_difference(self,other):
-        try:
-            for item in self.container:
-                for item in other:
-                    if item not in other:
-                        self.container.add(item)
-            return self.container
-        except KeyError:
-            return False
+            bucket = []
+            for item in self:
+                if item not in other:
+                    bucket.append(item)
+            return bucket
+
 
 
 class HashTable(object):
@@ -158,7 +155,7 @@ class HashTable(object):
             # Note that if there's a hash collision we don't add the item
 
     def __repr__(self):
-        return self._buckets
+        return str(self._buckets)
 
     def __getitem__(self, key):
         key_index = self.get_hash(key)
