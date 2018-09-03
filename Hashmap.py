@@ -37,7 +37,6 @@ class HashSet(object):
         return len(self.container)
 
     def __iter__(self):
-        # import pdb; pdb.set_trace()
         for k, _ in self.container:
             yield k
 
@@ -61,31 +60,26 @@ class HashSet(object):
 
     def isSubset(self,set1):
 
-        for item in self:
-
-            if item in set1 and self:
-                return True
+        a_Sub_set = [int(x) for x in self if x in set1]
+        return a_Sub_set
 
     def __repr__(self):
         return str(self.container)
 
     def isSuperSet(self, set1):
 
-        for item in self:
-            if item in set1:
-                return True
-            else:
-                return False
+        is_a_Super_set = [int(x) for x in set1 if x in self]
+        return is_a_Super_set
 
     def union(self, set1):
         bucket = []
         #import pdb; pdb.set_trace()
         for idx in self:
-            bucket.append(idx)
+            bucket.append(int(idx))
                 #should copy all the values into bucket
         for other in set1:
             if other not in self:
-                bucket.append(other)
+                bucket.append(int(other))
                         #should check if value is not in self,
                         #then add value bucket
         # li_dif = [i for i in self if i in self or i in set1]
@@ -94,19 +88,16 @@ class HashSet(object):
         return  bucket
 
 
-    def intersect(self,set1,set2):
-        if len(set1) > len(set2):
-            set1,set2 = set2,set1
-
-            result = self.container
-            for item in set1 :
-                if item in set2:
-                    result.add(item)
-            return result
+    def intersect(self,set1):
+        if len(set1) > len(self):
+            set1,self = self,set1
+        li_dif = [i for i in self if i in self and i in set1]
+        return li_dif
 
     def my_difference(self,other):
             bucket = []
             for item in self:
+
                 if item not in other:
                     bucket.append(item)
             return bucket

@@ -83,17 +83,34 @@ class HashSetTest(unittest.TestCase):
         dx.add('3')
         dx.add('5')
         dx.add('7')
-        result = ['1', '2', '4', '6', '3', '5', '7']
+        result = [1,2,4,6,3,5,7]
         self.assertEqual(sx.union(dx), result)
 
     def test_if_subset(self):
         sx = HashSet()
-        sx.add('1')
-        sx.add('2')
-        sx.add('3')
-        d = ['1','2','3','4','5','6','7']
-        #Would be wise to use AssertIn,but returning True or False
+        sx.add(1)
+        sx.add(2)
+        sx.add(3)
+        d = [1,2,3,4,5,6,7]
+        #Would be wise to uses AssertIn,but returning True or False
         self.assertTrue(sx.isSubset(d),d)
+
+    def test_intersection_of_two_list(self):
+        first_list= HashSet()
+        first_list.add(2)
+        first_list.add(4)
+        first_list.add(5)
+        first_list.add(6)
+
+        second_list= HashSet()
+        second_list.add(4)
+        second_list.add(6)
+        second_list.add(7)
+        second_list.add(8)
+
+        result = [4,6]
+        self.assertEqual(first_list.intersect(second_list),result)
+
 
     def test_if_difference(self):
         # I'm aware of Sorting issue
@@ -105,6 +122,7 @@ class HashSetTest(unittest.TestCase):
         d = ['c', 'f', 'g']
         result = ['a', 'b','d']
         self.assertEqual(sx.my_difference(d), result)
+
     def test_len_is_zero(self):
         s= HashSet()
         self.assertEqual(len(s),0)
@@ -171,11 +189,6 @@ class HashSetTest(unittest.TestCase):
         result = next(it)
 
         self.assertEqual("MoveOut", result)
-
-
-
-
-
 
 
 
