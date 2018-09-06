@@ -59,17 +59,17 @@ class HashSet(object):
 
 
     def isSubset(self,set1):
-
-        a_Sub_set = [int(x) for x in self if x in set1]
-        return a_Sub_set
+        
+        for x in self:
+            return x in set1
 
     def __repr__(self):
         return str(self.container)
 
     def isSuperSet(self, set1):
-
-        is_a_Super_set = [int(x) for x in set1 if x in self]
-        return is_a_Super_set
+        #Should simply return TRUE OR False
+        for x in set1:
+            return x in self
 
     def union(self, set1):
         bucket = []
@@ -101,6 +101,11 @@ class HashSet(object):
                 if item not in other:
                     bucket.append(item)
             return bucket
+    def map(my_function, my_list):
+        result = []
+        for i in my_list:
+            result.append(my_function(i))
+        return result
 
 
 
