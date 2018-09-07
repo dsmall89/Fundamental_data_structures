@@ -69,7 +69,7 @@ class HashSetTest(unittest.TestCase):
         s.add("Donte")
         self.assertIn("Donte", s)
 
-    def test_union_of_sets(self):
+    def test_If_There_Isa_union_of_sets(self):
 
 
         sx = HashSet()
@@ -86,7 +86,7 @@ class HashSetTest(unittest.TestCase):
         result = [1,2,4,6,3,5,7]
         self.assertEqual(sx.union(dx), result)
 
-    def test_if_subset(self):
+    def test_If_There_Isa_Subset(self):
         sx = HashSet()
         sx.add(1)
         sx.add(2)
@@ -106,7 +106,7 @@ class HashSetTest(unittest.TestCase):
 
 
 
-    def test_intersection_of_two_list(self):
+    def test_Intersection_Of_Two_List(self):
         first_list= HashSet()
         first_list.add(2)
         first_list.add(4)
@@ -123,7 +123,7 @@ class HashSetTest(unittest.TestCase):
         self.assertEqual(first_list.intersect(second_list),result)
 
 
-    def test_if_difference(self):
+    def test_If_There_Isa_Difference(self):
         # I'm aware of Sorting issue
         sx = HashSet()
         sx.add('a')
@@ -151,7 +151,7 @@ class HashSetTest(unittest.TestCase):
 
         self.assertEqual(len(s),3)
 
-    def test_if_two_in_same_bucket(self):
+    def test_If_Two_In_Same_Bucket(self):
         s= HashSet()
         s.add("one")
         self.assertIn("one", s)
@@ -159,7 +159,7 @@ class HashSetTest(unittest.TestCase):
         self.assertIn("one", s)
         self.assertIn("two", s)
 
-    def test_doesnt_misidentify_an_item_with_the_same_hash(self):
+    def test_Doesnt_Misidentify_an_item_with_the_same_hash(self):
         # We assume one and two have the same hash
         self.assertEquals(self.set.container.get_hash("one"), self.set.container.get_hash("two"))
 
@@ -167,7 +167,7 @@ class HashSetTest(unittest.TestCase):
         self.assertIn("one", self.set)
         self.assertNotIn("two", self.set)
 
-    def test_len_with_multiple_items_in_two_buckets(self):
+    def test_Len_With_Multiple_Items_In_Two_Buckets(self):
 
         s = HashSet()
         s.add("One")
