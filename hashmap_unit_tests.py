@@ -95,6 +95,17 @@ class HashSetTest(unittest.TestCase):
         #Would be wise to uses AssertIn,but returning True or False
         self.assertTrue(sx.isSubset(d),d)
 
+    def test_Is_Not_Subset(self):
+        sx = HashSet()
+        sx.add(1)
+        sx.add(2)
+        sx.add(3)
+        dx = [4,5,6]
+        #Would be wise to uses AssertIn,but returning True or False
+        self.assertFalse(sx.isSubset(dx),dx)
+
+
+
     def test_intersection_of_two_list(self):
         first_list= HashSet()
         first_list.add(2)
