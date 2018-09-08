@@ -70,8 +70,6 @@ class HashSetTest(unittest.TestCase):
         self.assertIn("Donte", s)
 
     def test_If_There_Isa_union_of_sets(self):
-
-
         sx = HashSet()
         sx.add('1')
         sx.add('2')
@@ -143,6 +141,15 @@ class HashSetTest(unittest.TestCase):
         s.add("One")
         self.assertEqual(len(s),1)
 
+    def test_len_method_counts_correctly(self):
+        s = HashSet()
+        s.add("One")
+        s.add("two")
+        self.assertEqual(len(s),2)
+
+        s.add('third')
+        self.assertFalse(len(s),3)
+
     def test_len_with_multiple_items(self):
         s = HashSet()
         s.add("One")
@@ -162,7 +169,6 @@ class HashSetTest(unittest.TestCase):
     def test_Doesnt_Misidentify_an_item_with_the_same_hash(self):
         # We assume one and two have the same hash
         self.assertEquals(self.set.container.get_hash("one"), self.set.container.get_hash("two"))
-
         self.set.add("one")
         self.assertIn("one", self.set)
         self.assertNotIn("two", self.set)
@@ -181,8 +187,6 @@ class HashSetTest(unittest.TestCase):
         s2.add("six")
         s2.add("seven")
         self.assertEqual(len(s2),4)
-
-
 
     # def test_iteration(self):
     #     for house, saying in self.example_element.items():

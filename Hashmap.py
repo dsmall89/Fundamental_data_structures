@@ -53,13 +53,11 @@ class HashSet(object):
     #     for k, _ in self.container:
     #         yield k
 
-    # def next(self):
-    #
-    #     return self.container.__next__()
+
 
 
     def isSubset(self,set1):
-        
+
         for x in self:
             return x in set1
 
@@ -82,7 +80,6 @@ class HashSet(object):
                 bucket.append(int(other))
                         #should check if value is not in self,
                         #then add value bucket
-        # li_dif = [i for i in self if i in self or i in set1]
         # s = [ x for x in self if x in set1 ]
 
         return  bucket
