@@ -23,7 +23,7 @@ class HashSet(object):
     def __init__(self):
 
         self.index = 0
-        self.container= HashTable()
+        self.container = HashTable()
 
 
     def add(self,item):
@@ -71,7 +71,6 @@ class HashSet(object):
 
     def union(self, set1):
         bucket = []
-        #import pdb; pdb.set_trace()
         for idx in self:
             bucket.append(int(idx))
                 #should copy all the values into bucket
@@ -79,9 +78,8 @@ class HashSet(object):
             if other not in self:
                 bucket.append(int(other))
                         #should check if value is not in self,
-                        #then add value bucket
+                        #then add value to bucket
         # s = [ x for x in self if x in set1 ]
-
         return  bucket
 
 

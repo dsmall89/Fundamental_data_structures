@@ -198,15 +198,9 @@ class HashSetTest(unittest.TestCase):
     def test_next(self):
         s4 = HashSet()
         s4.add('MoveOut')
-
-
         it = iter(s4)
         result = next(it)
-
         self.assertEqual("MoveOut", result)
-
-
-
 
 
 if __name__ == "__main__":
