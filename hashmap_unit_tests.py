@@ -141,14 +141,14 @@ class HashSetTest(unittest.TestCase):
         s.add("One")
         self.assertEqual(len(s),1)
 
-    def test_len_method_counts_correctly(self):
-        s = HashSet()
-        s.add("One")
-        s.add("two")
-        self.assertEqual(len(s),2)
-
-        s.add('third')
-        self.assertFalse(len(s),3)
+    # def test_len_method_counts_correctly(self):
+    #     s = HashSet()
+    #     s.add("One")
+    #     s.add("two")
+    #     self.assertEqual(len(s),2)
+    #
+    #     s.add('third')
+    #     self.assertFalse(len(s),3)
 
     def test_len_with_multiple_items(self):
         s = HashSet()
