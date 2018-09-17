@@ -57,14 +57,18 @@ class HashSet(object):
 
 
     def isSubset(self,set1):
+        return sorted(self) == sorted(set1)
 
-        for x in self:
-            return x in set1
+
+
+
+
 
     def __repr__(self):
         return str(self.container)
 
     def isSuperSet(self, set1):
+
         #Should simply return TRUE OR False
         for x in set1:
             return x in self

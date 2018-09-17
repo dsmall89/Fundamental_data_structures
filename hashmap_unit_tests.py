@@ -84,6 +84,16 @@ class HashSetTest(unittest.TestCase):
         result = [1,2,4,6,3,5,7]
         self.assertEqual(sx.union(dx), result)
 
+    def test_if_subset_of_checks_for_more_than_item(self):
+        sx = HashSet()
+        sx.add('1')
+        sx.add('2')
+
+        dx = HashSet()
+        dx.add('2')
+
+        result = [1,2]
+        self.assertEqual(dx.union(sx), result)
     def test_If_There_Isa_Subset(self):
         sx = HashSet()
         sx.add(1)
