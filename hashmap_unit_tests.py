@@ -71,17 +71,17 @@ class HashSetTest(unittest.TestCase):
 
     def test_If_There_Isa_union_of_sets(self):
         sx = HashSet()
-        sx.add('1')
-        sx.add('2')
-        sx.add('4')
-        sx.add('6')
+        sx.add(1)
+        sx.add(2)
+        sx.add(4)
+        sx.add(6)
 
         dx = HashSet()
-        dx.add('1')
-        dx.add('3')
-        dx.add('5')
-        dx.add('7')
-        result = [1,2,4,6,3,5,7]
+        dx.add(1)
+        dx.add(3)
+        dx.add(5)
+        dx.add(7)
+        result = HashSet([1,2,4,6,3,5,7])
         self.assertEqual(sx.union(dx), result)
 
     def test_if_subset_of_checks_for_more_than_item(self):
@@ -92,8 +92,9 @@ class HashSetTest(unittest.TestCase):
         dx = HashSet()
         dx.add('2')
 
-        result = [1,2]
-        self.assertEqual(dx.union(sx), result)
+
+        self.assertTrue(dx.isSubset(sx))
+
     def test_If_There_Isa_Subset(self):
         sx = HashSet()
         sx.add(1)
@@ -104,6 +105,7 @@ class HashSetTest(unittest.TestCase):
         self.assertTrue(sx.isSubset(d),d)
 
     def test_Is_Not_Subset(self):
+
         sx = HashSet()
         sx.add(1)
         sx.add(2)

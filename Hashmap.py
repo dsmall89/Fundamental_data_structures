@@ -20,10 +20,12 @@ class HashMap(object):
         return self._table.delete(key)
 
 class HashSet(object):
-    def __init__(self):
-
+    def __init__(self, initial_values = []):
         self.index = 0
         self.container = HashTable()
+
+        for v in initial_values:
+            self.add(v)
 
 
     def add(self,item):
@@ -53,34 +55,37 @@ class HashSet(object):
     #     for k, _ in self.container:
     #         yield k
 
-
-
+    def __eq__(self, other):
+        return  self.container== other.container
 
     def isSubset(self,set1):
-        return sorted(self) == sorted(set1)
-
-
-
-
-
+        # true if each element in self is in set1
+        for element in self:
+            if element not in set1:
+                return False
+        return True
 
     def __repr__(self):
-        return str(self.container)
+        #self.container=
+
+        return repr(self.container)
 
     def isSuperSet(self, set1):
 
         #Should simply return TRUE OR False
-        for x in set1:
-            return x in self
+        for element in set1:
+            if element not in self:
+                return False
+        return True
 
     def union(self, set1):
-        bucket = []
+        bucket = HashSet()
         for idx in self:
-            bucket.append(int(idx))
+            bucket.add(idx)
                 #should copy all the values into bucket
         for other in set1:
             if other not in self:
-                bucket.append(int(other))
+                bucket.add(other)
                         #should check if value is not in self,
                         #then add value to bucket
         # s = [ x for x in self if x in set1 ]
