@@ -82,7 +82,7 @@ class HashSetTest(unittest.TestCase):
         dx.add(5)
         dx.add(7)
         result = HashSet([1,2,4,6,3,5,7])
-        self.assertEqual(sx.union(dx), result)
+        self.assertEqual(sx.union(dx),result )
 
     def test_if_subset_of_checks_for_more_than_item(self):
         sx = HashSet()

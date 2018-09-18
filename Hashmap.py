@@ -56,7 +56,7 @@ class HashSet(object):
     #         yield k
 
     def __eq__(self, other):
-        return  self.container== other.container
+        return  isinstance(other,HashSet) and self.container == other.container
 
     def isSubset(self,set1):
         # true if each element in self is in set1
