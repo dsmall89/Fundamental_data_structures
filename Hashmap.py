@@ -56,7 +56,7 @@ class HashSet(object):
     #         yield k
 
     def __eq__(self, other):
-        return  isinstance(other,HashSet) and self.container == other.container
+        return  isinstance(other,HashTable) and self.container == other.container
 
     def isSubset(self,set1):
         # true if each element in self is in set1
@@ -68,7 +68,7 @@ class HashSet(object):
     def __repr__(self):
         #self.container=
 
-        return repr(self.container)
+        return str(self.container)
 
     def isSuperSet(self, set1):
 
