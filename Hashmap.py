@@ -54,9 +54,10 @@ class HashSet(object):
     #
     #     for k, _ in self.container:
     #         yield k
-
+    def __hash__(self):
+        return hash(self.container)
     def __eq__(self, other):
-        return  isinstance(other,HashTable) and self.container == other.container
+        return  isinstance(other,HashSet) and self.container == other.container
 
     def isSubset(self,set1):
         # true if each element in self is in set1
@@ -130,7 +131,8 @@ class HashTable(object):
              for pair in bucket:
                  yield pair
 
-
+    def __eq__(self, other):
+        return  isinstance(other,HashTable) and self._buckets == other._buckets
     def get_hash(self,key):
         hash = 0
         for character in str(key):
