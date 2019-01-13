@@ -117,27 +117,6 @@ class Node(object):
         else:
             if self.right:
                 return  self.right.search(input_value)
-
-
-
-
-
-
-
-
-# def printPreorder(root ):
-#     if root:
-#         # First print the data of Node
-#          print(root.input_value),
-#         #Then recur on left child
-#          printPreorder(root.left)
-#         #Finally recur on right child
-#          printPreorder(root.right)
-
-
-
-
-
 if __name__ == '__main__':
     tree = Node(1)
     tree.insert(2)
@@ -147,7 +126,7 @@ if __name__ == '__main__':
 
     def print_it(n):
         print(n),
-
+        
     print("\nPre_order ")
     tree.pre_order(print_it)
     print("")
@@ -156,21 +135,13 @@ if __name__ == '__main__':
     print("")
     print("\nPost_order")
     tree.post_order(print_it)
-
     print("\n")
-    #import pdb; pdb.set_trace()
     tree.delete(5)
     tree.post_order(print_it)
     print("\n")
     print(tree.search(2))
 
 
-
-
-
-
-
-#
 # print("Preorder traversal of binary tree is")
 # printPreorder(root)
 

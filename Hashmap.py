@@ -102,7 +102,6 @@ class HashSet(object):
     def my_difference(self,other):
             bucket = []
             for item in self:
-
                 if item not in other:
                     bucket.append(item)
             return bucket

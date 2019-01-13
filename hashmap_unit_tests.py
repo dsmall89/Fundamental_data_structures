@@ -11,13 +11,13 @@ class hashmap_test(unittest.TestCase):
                                 'Nahleen' : 'Small'}
 
 
-    def test_set_element_in_hash_map(self):
+    def test_Set_element_in_hash_map(self):
         self.hash_map['Donte'] = self.example_element['Donte']
         self.assertEqual(self.example_element['Donte'],self.hash_map['Donte'])
 
 
 
-    def test_element_is_in_hash_map(self):
+    def test_Element_is_in_hash_map(self):
         # Why does this keep getting stuck in an infinite loop
         # Also, why when switch self.hash_map an error is thrown
          self.assertTrue('Biggie' not in self.hash_map)
@@ -27,7 +27,7 @@ class hashmap_test(unittest.TestCase):
 
 
 
-    def test_delete_one_elments(self):
+    def test_Delete_one_elments(self):
         #add the item to the hash map
         #if this line is removed the test will break, why ?
         self.hash_map['another_test_key']= 'another_test_value'
@@ -38,21 +38,14 @@ class hashmap_test(unittest.TestCase):
         #assert that key is removed
         self.assertNotIn('another_test_key', self.hash_map )
 
-    # def test_delele_correct_element(self):
-    #     self.hash_map[3]= 'another_test_value'
-    # Should verifty the number is correct, I already know my delete function is returning True
-    #     self.assertFalse(self.hash_map.delete(3),3)
-
-
-
-    def test_delete_one_elment_not_in_hash(self):
+    def test_Delete_one_elment_not_in_hash(self):
 
 
         with self.assertRaises(KeyError):
                 self.hash_map['Not existent']
 
 class HashTableTest(unittest.TestCase):
-    def test_next_with_one_item_returns_key_and_value(self):
+    def test_Next_with_one_item_returns_key_and_value(self):
         t = HashTable()
         t["Donte"] = "Small"
         i = iter(t)
@@ -64,7 +57,7 @@ class HashSetTest(unittest.TestCase):
     def setUp(self):
         self.set = HashSet()
 
-    def test_added_item_is_in_set(self):
+    def test_Added_item_is_in_set(self):
         s = HashSet()
         s.add("Donte")
         self.assertIn("Donte", s)
@@ -85,7 +78,7 @@ class HashSetTest(unittest.TestCase):
         result = HashSet([1,2,4,6,3,5,7])
         self.assertEqual(sx.union(dx),result)
 
-    def test_if_subset_of_checks_for_more_than_item(self):
+    def test_If_subset_of_checks_for_more_than_item(self):
         sx = HashSet()
         sx.add('1')
         sx.add('2')
@@ -145,25 +138,16 @@ class HashSetTest(unittest.TestCase):
         result = ['a', 'b','d']
         self.assertEqual(sx.my_difference(d), result)
 
-    def test_len_is_zero(self):
+    def test_Len_is_zero(self):
         s= HashSet()
         self.assertEqual(len(s),0)
 
-    def test_len_method(self):
+    def test_Len_method(self):
         s = HashSet()
         s.add("One")
         self.assertEqual(len(s),1)
 
-    # def test_len_method_counts_correctly(self):
-    #     s = HashSet()
-    #     s.add("One")
-    #     s.add("two")
-    #     self.assertEqual(len(s),2)
-    #
-    #     s.add('third')
-    #     self.assertFalse(len(s),3)
-
-    def test_len_with_multiple_items(self):
+    def test_Len_with_multiple_items(self):
         s = HashSet()
         s.add("One")
         s.add("two")
@@ -201,14 +185,7 @@ class HashSetTest(unittest.TestCase):
         s2.add("seven")
         self.assertEqual(len(s2),4)
 
-    # def test_iteration(self):
-    #     for house, saying in self.example_element.items():
-    #         self.hashmap[house] = saying
-    #
-    #     for house, saying in self.hashmap:
-    #         self.assertEqual(self.example_element[house], saying)
-
-    def test_next(self):
+    def test_Next(self):
         s4 = HashSet()
         s4.add('MoveOut')
         it = iter(s4)

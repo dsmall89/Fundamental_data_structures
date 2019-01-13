@@ -3,9 +3,9 @@ class graph(object):
     def __init__(self, connections, directed = False):
         self.graph = defaultdict(set)
         self.directed = directed
-        self.add_connections(connections)
+        self.add_Connections(connections)
 
-    def add_connections(self,connections):
+    def add_Connections(self,connections):
         for start_node, end_node in connections:
             self.add(start_node, end_node)
 
@@ -15,12 +15,12 @@ class graph(object):
             self.graph[end_node].add(start_node)
 
 
-    def is_connected(self,start_node,end_node):
+    def is_Connected(self,start_node,end_node):
 
         return start in self.graph and node in self.graph[start_node]
 # Determines a path between two nodes,
 #takes a self.graph and the start_node and end_node nodes as args.
-    def find_path(self, start_node, end_node, path= []):
+    def find_Path(self, start_node, end_node, path= []):
         path = path + [start_node_node]
 
         if start_node == end_node :
@@ -31,7 +31,7 @@ class graph(object):
 
         for node in self.graph[start_node]:
             if node not in path:
-                newpath = self.find_path( start_node, end_node, path)
+                newpath = self.find_Path( start_node, end_node, path)
 
                 if newpath:
                     #returns a  list of nodes comprising the path.
@@ -39,7 +39,7 @@ class graph(object):
         #if no path are return None !
         return None
 
-    def find_all_paths(self, start_node, end_node, path= []):
+    def find_All_paths(self, start_node, end_node, path= []):
         path = path + [start_node]
 
         if start_node == end_node:
@@ -51,13 +51,13 @@ class graph(object):
 
         for node in self.graph[start_node]:
             if node not in path :
-                newpaths = self.find_all_paths(start_node, end_node, path)
+                newpaths = self.find_All_paths(start_node, end_node, path)
 
                 for newpath in newpaths:
                     paths.append_node(newpath)
         return paths
 
-    def find_shortest_path(self,start_node, end_node , path=[]):
+    def find_Shortest_path(self,start_node, end_node , path=[]):
         path = path + [start_node]
 
         if start_node == end_node:
@@ -69,7 +69,7 @@ class graph(object):
         shortest = None
         for node in self.graph[start_node]:
             if node not in path:
-                newpath = self.find_shortest_path( self.node, end_node, path)
+                newpath = self.find_Shortest_path( self.node, end_node, path)
 
                 if newpath:
                     if not shortest or len(newpath) < len(shortest):
